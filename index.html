@@ -3,7 +3,6 @@
 <head>
     <meta charset=\"utf-8\">
     <title>XMRigCC Dashboard</title>
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.0/css/buttons.bootstrap.min.css">
@@ -136,15 +135,15 @@
 }
 
 .online {
-    color: green
+    color: green !important
 }
 
 .offline {
-    color: red
+    color: red !important
 }
 
 .paused {
-    color: yellow
+    color: yellow !important
 }
 
 .toggle {
@@ -233,7 +232,7 @@ body{
 }
 .start-header.scroll-on .navbar-brand img{
 	/* height: 60px; */
-	transform: scale(1.1);
+	transform: scale(1.05);
 	/* transform: translateY(-40%); */
 	-webkit-transition : all 0.3s ease-out;
 	transition : all 0.3s ease-out;
@@ -811,6 +810,7 @@ table>thead {
                         
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav navbar-expand-md ml-auto py-4 py-md-0">
+                                <!-- <ul class="navbar-nav navbar-expand-md"> -->
                                 <!-- <li class="nav-item nav-button active">
                                     <a class="nav-link" href="#" role="button">Home</a>
                                 </li> -->
@@ -1509,6 +1509,7 @@ table>thead {
             );
     
             $(document).ready(function () {
+
                 var table = $('#clientStatusList').DataTable({
                     dom: "<'row'<'col-sm-12'B>><'row rowPadded'<'col-sm-9'l><'col-sm-3'f>><'row'<'col-sm-12't>><'row'<'col-sm-4'i><'col-sm-8'p>><'col-sm-13'<'#serverTime'>>",
                     lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
@@ -1519,6 +1520,10 @@ table>thead {
                     ajax: {
                         url: "/admin/getClientStatusList",
                         dataSrc: 'client_status_list'
+                    },
+                    "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                        $('td', nRow).css('background-color', '#fff');
+                        $('td', nRow).css('color', '#000');
                     },
                     orderFixed: [5, 'asc'],
                     rowGroup: {
@@ -1534,7 +1539,7 @@ table>thead {
                             data: null,
                             defaultContent: '',
                             className: 'select-checkbox',
-                            render: checkbox,
+                            // render: checkbox,
                             orderable: false
                         },
                         {data: "client_status.client_id", render: clientInfo},
